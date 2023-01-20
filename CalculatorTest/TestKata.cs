@@ -97,6 +97,25 @@ namespace CalculatorTest
             ApplyAndTest(katastring, expected);
         }
 
+        [Theory]
+        [Category("Negative Numbers")]
+        [InlineData("-1", "negatives are not allowed :-1")]
+        [InlineData("-1,-2", "negatives are not allowed :-1-2")]
+        [InlineData("-1\n-2", "negatives are not allowed :-1-2")]
+        [InlineData("//#\n2#-18#20", "negatives are not allowed :-18")]
+        public void Add_NegativeNumbers_ThrowException(string katastring, String expectedMessage)
+        {
+            try { int Result = calculator.Add(katastring); }
+
+            catch (ArgumentException exception)
+            {
+
+                String actualMessage = exception.Message;
+
+                Assert.Equal(actualMessage, expectedMessage);
+            }
+
+        }
 
         private void ApplyAndTest(string katastring, int expected)
         {
