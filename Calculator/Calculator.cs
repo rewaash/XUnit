@@ -8,7 +8,7 @@
         {
             if (Numbers == String.Empty) return 0;
             
-            char[] spearator = { ',' };
+            char[] spearator = { ',' ,'\n' };
           
                var numbers = Numbers.Split(spearator,
                   StringSplitOptions.RemoveEmptyEntries); 
