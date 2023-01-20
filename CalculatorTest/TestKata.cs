@@ -70,6 +70,34 @@ namespace CalculatorTest
 
             ApplyAndTest(katastring, expected);
         }
+
+
+
+        [Theory]
+        [Category("UnKnownAmountOfNumbers")]
+        [InlineData("//r\n14", 14)]
+        [InlineData("//;\n10;20;7", 37)]
+        [InlineData("//#\n2#18#20", 40)]
+
+        public void Add_NewDelimitersBetweenNumbers_ReturnSum(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+        [Theory]
+        [Category("WithoutNewDelimiters")]
+        [InlineData("2\n3\n1\n2", 8)]
+        [InlineData("2,3,4", 9)]
+        [InlineData("7\n2,5", 14)]
+
+        public void Add_WithoutNewDelimiters_ReturnSum(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+
         private void ApplyAndTest(string katastring, int expected)
         {
             int Actual = calculator.Add(katastring);

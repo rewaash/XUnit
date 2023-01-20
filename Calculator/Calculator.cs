@@ -7,11 +7,27 @@
         public int Add(string Numbers)
         {
             if (Numbers == String.Empty) return 0;
-            
-            char[] spearator = { ',' ,'\n' };
-          
-               var numbers = Numbers.Split(spearator,
-                  StringSplitOptions.RemoveEmptyEntries); 
+            string[] numbers;
+            if (Numbers.StartsWith("//"))
+            {
+                numbers = Numbers.Split("\n",
+             StringSplitOptions.RemoveEmptyEntries);
+                var spliter = Numbers[2];
+                if (numbers.Length < 2)
+                    throw new IndexOutOfRangeException();
+
+                numbers = numbers[1].Split(spliter,
+              StringSplitOptions.RemoveEmptyEntries);
+
+
+            }
+            else
+            {
+                char[] spearator = { ',', '\n' };
+
+                numbers = Numbers.Split(spearator,
+                  StringSplitOptions.RemoveEmptyEntries);
+            }
 
             foreach (String number in numbers)
             {
