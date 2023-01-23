@@ -1,5 +1,7 @@
 using Xunit;
 using KataCalculator;
+using System.ComponentModel;
+
 namespace CalculatorTest
 {
     public class TestKata
@@ -12,6 +14,7 @@ namespace CalculatorTest
         }
 
         [Fact]
+        [Category("The simplest thing")]
         
         public void Add_Emptystrung_Return0()
         {
@@ -22,6 +25,7 @@ namespace CalculatorTest
 
         [Theory]
         [InlineData("0")]
+        [Category("The simplest thing")]
         public void Add_OneNumber_ReturnSameNumber(string x)
         {
             int actual = calculator.Add(x);
@@ -30,6 +34,7 @@ namespace CalculatorTest
         }
 
         [Theory]
+        [Category("The simplest thing")]
         [InlineData("0,1",1)]
         [InlineData("2,1",3)]
         [InlineData("2,2", 4)]
@@ -42,6 +47,7 @@ namespace CalculatorTest
         }
 
         [Theory]
+        [Category("UnKnownAmountOfNumber")]
         [InlineData("0,1,4", 5)]
         [InlineData("2,1", 3)]
         [InlineData("2,2,1,10", 15)]
@@ -53,6 +59,22 @@ namespace CalculatorTest
 
         }
 
+        [Theory]
+        [Category("UnKnownAmountOfNumber")]
+        [InlineData("2,3\n1,2", 8)]
+        [InlineData("2,,3\n4", 9)]
+        [InlineData("3,2\n\n5", 10)]
+
+        public void Add_WithLinesAndCommas_ReturnSum(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+        private void ApplyAndTest(string katastring, int expected)
+        {
+            int Actual = calculator.Add(katastring);
+            Assert.Equal(expected, Actual);
+        }
 
     }
 }
