@@ -70,6 +70,64 @@ namespace CalculatorTest
 
             ApplyAndTest(katastring, expected);
         }
+
+
+
+        [Theory]
+        [Category("UnKnownAmountOfNumbers")]
+        [InlineData("//r\n14", 14)]
+        [InlineData("//;\n10;20;7", 37)]
+        [InlineData("//#\n2#18#20", 40)]
+
+        public void Add_NewDelimitersBetweenNumbers_ReturnSum(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+        [Theory]
+        [Category("WithoutNewDelimiters")]
+        [InlineData("2\n3\n1\n2", 8)]
+        [InlineData("2,3,4", 9)]
+        [InlineData("7\n2,5", 14)]
+
+        public void Add_WithoutNewDelimiters_ReturnSum(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+        [Theory]
+        [Category("Negative Numbers")]
+        [InlineData("-1", "negatives are not allowed :-1")]
+        [InlineData("-1,-2", "negatives are not allowed :-1-2")]
+        [InlineData("-1\n-2", "negatives are not allowed :-1-2")]
+        [InlineData("//#\n2#-18#20", "negatives are not allowed :-18")]
+        public void Add_NegativeNumbers_ThrowException(string katastring, String expectedMessage)
+        {
+            try { int Result = calculator.Add(katastring); }
+
+            catch (ArgumentException exception)
+            {
+
+                String actualMessage = exception.Message;
+
+                Assert.Equal(actualMessage, expectedMessage);
+            }
+
+        }
+
+        [Theory]
+        [Category("NumbersBiggerThan1000")]
+        [InlineData("2,1001,", 2)]
+        [InlineData("2\n2000,", 2)]
+        public void Add_NumbersBiggerThan1000_ReturnSumIgnoredthem(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+
         private void ApplyAndTest(string katastring, int expected)
         {
             int Actual = calculator.Add(katastring);
