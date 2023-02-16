@@ -40,6 +40,8 @@
 
                 var value = Int32.Parse(number);
                 if (value < 0) { NegativeNumbers += value; continue; }
+                if (value > 1000)
+                    continue;
                 result += value;
 
             }

@@ -117,6 +117,17 @@ namespace CalculatorTest
 
         }
 
+        [Theory]
+        [Category("NumbersBiggerThan1000")]
+        [InlineData("2,1001,", 2)]
+        [InlineData("2\n2000,", 2)]
+        public void Add_NumbersBiggerThan1000_ReturnSumIgnoredthem(string katastring, int expected)
+        {
+
+            ApplyAndTest(katastring, expected);
+        }
+
+
         private void ApplyAndTest(string katastring, int expected)
         {
             int Actual = calculator.Add(katastring);
