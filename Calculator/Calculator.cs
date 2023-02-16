@@ -21,6 +21,7 @@
 
 
             }
+
             else
             {
                 char[] spearator = { ',', '\n' };
@@ -29,14 +30,23 @@
                   StringSplitOptions.RemoveEmptyEntries);
             }
 
+
+
+             string NegativeNumbers = new string("");
+
             foreach (String number in numbers)
             {
                 if (string.IsNullOrWhiteSpace(number)) continue;
+
                 var value = Int32.Parse(number);
-               
+                if (value < 0) { NegativeNumbers += value; continue; }
+                if (value > 1000)
+                    continue;
                 result += value;
 
             }
+
+            if(NegativeNumbers.Length > 0) { throw new ArgumentException($"negatives are not allowed :{NegativeNumbers}"); }
 
 
             return result;
