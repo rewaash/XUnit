@@ -15,7 +15,8 @@ namespace CalculatorTest
 
         [Fact]
         [Category("The simplest thing")]
-        
+        [Trait("Category", "The simplest thing")]
+
         public void Add_Emptystrung_Return0()
         {
             int actual = calculator.Add(" ");
@@ -26,6 +27,7 @@ namespace CalculatorTest
         [Theory]
         [InlineData("0")]
         [Category("The simplest thing")]
+        [Trait("Category", "The simplest thing")]
         public void Add_OneNumber_ReturnSameNumber(string x)
         {
             int actual = calculator.Add(x);
@@ -35,6 +37,7 @@ namespace CalculatorTest
 
         [Theory]
         [Category("The simplest thing")]
+        [Trait("Category", "The simplest thing")]
         [InlineData("0,1",1)]
         [InlineData("2,1",3)]
         [InlineData("2,2", 4)]
@@ -61,6 +64,7 @@ namespace CalculatorTest
 
         [Theory]
         [Category("UnKnownAmountOfNumber")]
+        [Trait("Category", "UnKnownAmountOfNumbers")]
         [InlineData("2,3\n1,2", 8)]
         [InlineData("2,,3\n4", 9)]
         [InlineData("3,2\n\n5", 10)]
@@ -75,6 +79,7 @@ namespace CalculatorTest
 
         [Theory]
         [Category("UnKnownAmountOfNumbers")]
+        [Trait("Category", "UnKnownAmountOfNumbers")]
         [InlineData("//r\n14", 14)]
         [InlineData("//;\n10;20;7", 37)]
         [InlineData("//#\n2#18#20", 40)]
@@ -87,6 +92,7 @@ namespace CalculatorTest
 
         [Theory]
         [Category("WithoutNewDelimiters")]
+        [Trait("Category", "WithoutNewDelimiters")]
         [InlineData("2\n3\n1\n2", 8)]
         [InlineData("2,3,4", 9)]
         [InlineData("7\n2,5", 14)]
@@ -99,6 +105,7 @@ namespace CalculatorTest
 
         [Theory]
         [Category("Negative Numbers")]
+        [Trait("Category", "Negative Numbers")]
         [InlineData("-1", "negatives are not allowed :-1")]
         [InlineData("-1,-2", "negatives are not allowed :-1-2")]
         [InlineData("-1\n-2", "negatives are not allowed :-1-2")]
@@ -118,7 +125,7 @@ namespace CalculatorTest
         }
 
         [Theory]
-        [Category("NumbersBiggerThan1000")]
+        [Trait("Category","NumbersBiggerThan1000")]
         [InlineData("2,1001,", 2)]
         [InlineData("2\n2000,", 2)]
         public void Add_NumbersBiggerThan1000_ReturnSumIgnoredthem(string katastring, int expected)
